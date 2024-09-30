@@ -98,19 +98,18 @@ button:hover {
     border-radius: 4px;
     background-color: var(--input-bg);
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
+    flex-direction: column;
 }
 
 .question-item label {
-    flex: 1 1 200px;
-    margin-right: 15px;
+    margin-bottom: 10px;
     font-weight: bold;
     color: var(--text-color);
 }
 
 .question-item textarea {
-    flex: 2 1 300px;
+    width: 100%;
+    max-width: 100%;
     margin-bottom: 10px;
     background-color: var(--container-bg);
     color: var(--text-color);
@@ -118,13 +117,13 @@ button:hover {
     padding: 8px;
     border-radius: 4px;
     box-sizing: border-box;
+    resize: vertical;
 }
 
 .edit-delete-buttons {
-    flex: 1 1 100%;
     display: flex;
     justify-content: flex-end;
-    margin-top: 10px;
+    margin-top: 0px;
 }
 
 .edit-button, .delete-button {
@@ -132,10 +131,11 @@ button:hover {
     color: white;
     border: none;
     border-radius: 4px;
-    padding: 5px 10px;
+    padding: 3px 8px;
     margin-left: 5px;
+    margin-top: 0px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .edit-button:hover, .delete-button:hover {
@@ -150,14 +150,25 @@ button:hover {
     background-color: var(--clear-button-hover);
 }
 
-#featureList li, #questionList div {
+#featureList li {
     display: flex;
     align-items: center;
     margin-bottom: 5px;
 }
 
-#featureList li span, #questionList div label {
+#featureList li span {
     flex-grow: 1;
+}
+
+#featureList .edit-delete-buttons {
+    display: flex;
+    margin-left: 10px;
+}
+
+#featureList .edit-button,
+#featureList .delete-button {
+    padding: 2px 6px;
+    font-size: 10px;
 }
 
 #addFeature, #addQuestion {

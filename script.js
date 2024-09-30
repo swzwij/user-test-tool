@@ -13,8 +13,8 @@ const exportPDFButton = document.getElementById('exportPDF');
 function createFeatureElement(feature)
 {
     const li = document.createElement('li');
-    li.innerHTML = 
-    `
+    li.innerHTML =
+        `
         <span>${feature}</span>
         <div class="edit-delete-buttons">
             <button class="edit-button">Edit</button>
@@ -35,8 +35,8 @@ function createQuestionElement(question)
 {
     const div = document.createElement('div');
     div.className = 'question-item';
-    div.innerHTML = 
-    `
+    div.innerHTML =
+        `
         <label>${question}</label>
         <textarea rows="3" placeholder="Enter answer here"></textarea>
         <div class="edit-delete-buttons">
@@ -77,10 +77,13 @@ function deleteFeature(li)
 function editQuestion(div)
 {
     const label = div.querySelector('label');
+    const textarea = div.querySelector('textarea');
+    const currentAnswer = textarea.value;
     const newText = prompt('Edit question:', label.textContent);
     if (newText !== null && newText.trim() !== '')
     {
         label.textContent = newText.trim();
+        textarea.value = currentAnswer;
         saveData();
     }
 }
@@ -100,7 +103,7 @@ function getElementValue(id)
     if (element)
     {
         return element.value;
-    } 
+    }
     else
     {
         console.error(`Element with id '${id}' not found`);
@@ -108,35 +111,65 @@ function getElementValue(id)
     }
 }
 
-// Data Management
+function saveData()
+{
+    const features = Array.from(featureList.children).map(li => li.querySelector('span').textContent);
+    const questions = Array.from(questionList.children).map(div => ({
+        question: div.querySelector('label').textContent,
+        answer: div.querySelector('textarea').value
+    }));
+
+    const formData = {
+        features: features,
+        questions: questions,
+        testerName: document.getElementById('testerName').value,
+        testerAge: document.getElementById('testerAge').value,
+        testerGender: document.getElementById('testerGender').value,
+        testDate: document.getElementById('testDate').value,
+        testLocation: document.getElementById('testLocation').value,
+        playedBefore: document.getElementById('playedBefore').value,
+        preTestNotes: document.getElementById('preTestNotes').value,
+        realtimeNotes: document.getElementById('realtimeNotes').value
+    };
+
+    localStorage.setItem('userTestData', JSON.stringify(formData));
+}
+
 function loadSavedData()
 {
-    const savedFeatures = JSON.parse(localStorage.getItem('features') || '[]');
-    const savedQuestions = JSON.parse(localStorage.getItem('questions') || '[]');
+    const savedData = JSON.parse(localStorage.getItem('userTestData') || '{}');
 
-    savedFeatures.forEach(feature =>
+    if (savedData.features)
     {
-        featureList.appendChild(createFeatureElement(feature));
-    });
+        savedData.features.forEach(feature =>
+        {
+            featureList.appendChild(createFeatureElement(feature));
+        });
+    }
 
-    savedQuestions.forEach(question =>
+    if (savedData.questions)
     {
-        questionList.appendChild(createQuestionElement(question));
-    });
+        savedData.questions.forEach(questionData =>
+        {
+            const questionElement = createQuestionElement(questionData.question);
+            questionElement.querySelector('textarea').value = questionData.answer;
+            questionList.appendChild(questionElement);
+        });
+    }
+
+    document.getElementById('testerName').value = savedData.testerName || '';
+    document.getElementById('testerAge').value = savedData.testerAge || '';
+    document.getElementById('testerGender').value = savedData.testerGender || '';
+    document.getElementById('testDate').value = savedData.testDate || '';
+    document.getElementById('testLocation').value = savedData.testLocation || '';
+    document.getElementById('playedBefore').value = savedData.playedBefore || '';
+    document.getElementById('preTestNotes').value = savedData.preTestNotes || '';
+    document.getElementById('realtimeNotes').value = savedData.realtimeNotes || '';
 
     if (localStorage.getItem('darkMode') === 'enabled')
     {
         document.body.classList.add('dark-mode');
     }
-}
-
-function saveData()
-{
-    const features = Array.from(featureList.children).map(li => li.querySelector('span').textContent);
-    const questions = Array.from(questionList.children).map(div => div.querySelector('label').textContent);
-
-    localStorage.setItem('features', JSON.stringify(features));
-    localStorage.setItem('questions', JSON.stringify(questions));
 }
 
 function clearFields()
@@ -148,7 +181,7 @@ function clearFields()
         if (field)
         {
             field.value = '';
-        } 
+        }
         else
         {
             console.error(`Field with id '${fieldId}' not found`);
@@ -176,7 +209,6 @@ function clearAll()
     localStorage.removeItem('questions');
 }
 
-// Event Listeners
 addFeature.addEventListener('click', () =>
 {
     if (newFeature.value.trim() !== '')
@@ -203,7 +235,7 @@ toggleModeButton.addEventListener('click', () =>
     if (document.body.classList.contains('dark-mode')) 
     {
         localStorage.setItem('darkMode', 'enabled');
-    } 
+    }
     else
     {
         localStorage.setItem('darkMode', 'disabled');
@@ -293,13 +325,17 @@ exportPDFButton.addEventListener('click', () =>
         doc.text(splitNotes, 10, yPos);
 
         doc.save('user_test_report.pdf');
-
-        clearFields();
     }
     catch (error) 
     {
         console.error('Error generating PDF:', error);
     }
+});
+
+const formFields = document.querySelectorAll('input, select, textarea');
+formFields.forEach(field =>
+{
+    field.addEventListener('change', saveData);
 });
 
 window.addEventListener('load', loadSavedData);
