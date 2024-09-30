@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Test Tool</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <button id="clearAll" class="clear-button">Clear all fields</button>
+        <button id="toggleMode" class="toggle-mode-button">Toggle Dark Mode</button>
+        <h1>User Test Tool</h1>
+        <form id="testForm">
+            <h2>Features to be Tested</h2>
+            <ul id="featureList"></ul>
+            <input type="text" id="newFeature" placeholder="Enter a new feature">
+            <button type="button" id="addFeature">Add Feature</button>
+
+            <h2>Tester Information</h2>
+            <label for="testerName">Name:</label>
+            <input type="text" id="testerName" required>
+
+            <label for="testerAge">Age:</label>
+            <input type="number" id="testerAge" required>
+
+            <label for="testerGender">Gender:</label>
+            <select id="testerGender" required>
+                <option value="">Select gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+                <option value="prefer-not-to-say">Prefer not to say</option>
+            </select>
+
+            <label for="testDate">Test Date:</label>
+            <input type="date" id="testDate" required>
+
+            <label for="testLocation">Test Location:</label>
+            <input type="text" id="testLocation" required>
+
+            <label for="playedBefore">Has the tester played the game before?</label>
+            <select id="playedBefore" required>
+                <option value="">Select an option</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <h2>Test Questions</h2>
+            <div id="questionList"></div>
+            <input type="text" id="newQuestion" placeholder="Enter a new question">
+            <button type="button" id="addQuestion">Add Question</button>
+
+            <h2>Real-time Notes</h2>
+            <textarea id="realtimeNotes" rows="6" placeholder="Enter notes about tester's actions and comments here..."></textarea>
+
+            <button type="button" id="exportPDF">Export to PDF</button>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+:root {
+    --bg-color: #f4f4f4;
+    --container-bg: white;
+    --text-color: #333;
+    --input-bg: white;
+    --input-border: #ddd;
+    --button-bg: #4CAF50;
+    --button-hover: #45a049;
+    --clear-button-bg: #f44336;
+    --clear-button-hover: #d32f2f;
+}
+
+body.dark-mode {
+    --bg-color: #333;
+    --container-bg: #1a1a1a;
+    --text-color: #f4f4f4;
+    --input-bg: #2a2a2a;
+    --input-border: #444;
+    --button-bg: #2196F3;
+    --button-hover: #1976D2;
+    --clear-button-bg: #d32f2f;
+    --clear-button-hover: #b71c1c;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    background: var(--container-bg);
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    position: relative;
+    transition: background-color 0.3s;
+}
+
+h1, h2 {
+    color: var(--text-color);
+}
+
+h1 {
+    text-align: center;
+    margin-top: 40px;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+input[type="text"], input[type="number"], input[type="date"], select, textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid var(--input-border);
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: var(--button-bg);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: var(--button-hover);
+}
+
+#featureList {
+    list-style-type: none;
+    padding: 0;
+}
+
+#featureList li {
+    margin-bottom: 5px;
+}
+
+#addFeature, #addQuestion {
+    background-color: var(--button-bg);
+}
+
+#addFeature:hover, #addQuestion:hover {
+    background-color: var(--button-hover);
+}
+
+#realtimeNotes {
+    resize: vertical;
+}
+
+.clear-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: var(--clear-button-bg);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin: 0;
+    width: auto;
+}
+
+.clear-button:hover {
+    background-color: var(--clear-button-hover);
+}
+
+.toggle-mode-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: var(--button-bg);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin: 0;
+    width: auto;
+}
+
+.toggle-mode-button:hover {
+    background-color: var(--button-hover);
+}
