@@ -1,4 +1,3 @@
-// DOM Elements
 const featureList = document.getElementById('featureList');
 const newFeature = document.getElementById('newFeature');
 const addFeature = document.getElementById('addFeature');
@@ -9,12 +8,11 @@ const toggleModeButton = document.getElementById('toggleMode');
 const clearAllButton = document.getElementById('clearAll');
 const exportPDFButton = document.getElementById('exportPDF');
 
-// Helper Functions
 function createFeatureElement(feature)
 {
     const li = document.createElement('li');
     li.innerHTML =
-        `
+    `
         <span>${feature}</span>
         <div class="edit-delete-buttons">
             <button class="edit-button">Edit</button>
@@ -36,7 +34,7 @@ function createQuestionElement(question)
     const div = document.createElement('div');
     div.className = 'question-item';
     div.innerHTML =
-        `
+    `
         <label>${question}</label>
         <textarea rows="3" placeholder="Enter answer here"></textarea>
         <div class="edit-delete-buttons">
@@ -114,7 +112,8 @@ function getElementValue(id)
 function saveData()
 {
     const features = Array.from(featureList.children).map(li => li.querySelector('span').textContent);
-    const questions = Array.from(questionList.children).map(div => ({
+    const questions = Array.from(questionList.children).map(div => 
+    ({
         question: div.querySelector('label').textContent,
         answer: div.querySelector('textarea').value
     }));
