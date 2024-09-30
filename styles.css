@@ -93,18 +93,20 @@ button:hover {
     padding: 15px;
     border-radius: 4px;
     background-color: var(--input-bg);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
 .question-item label {
-    display: block;
+    flex: 1 1 200px;
+    margin-right: 15px;
     font-weight: bold;
-    margin-bottom: 10px;
     color: var(--text-color);
 }
 
 .question-item textarea {
-    width: 100%;
-    display: block;
+    flex: 2 1 300px;
     margin-bottom: 10px;
     background-color: var(--container-bg);
     color: var(--text-color);
@@ -115,8 +117,10 @@ button:hover {
 }
 
 .edit-delete-buttons {
+    flex: 1 1 100%;
     display: flex;
     justify-content: flex-end;
+    margin-top: 10px;
 }
 
 .edit-button, .delete-button {
