@@ -45,11 +45,15 @@ body {
 
 h1, h2 {
     color: var(--text-color);
+    border-top: 2px solid var(--text-color);
+    padding-top: 25px;
+    margin-top: 50px;
 }
 
 h1 {
     text-align: center;
     margin-top: 40px;
+    border-top: none;
 }
 
 label {
